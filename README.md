@@ -1,31 +1,35 @@
-# Free Sleep
+# Free Sleep for Home Assistant
 
-Home Assistant integration for Eight Sleep Pod mattress covers running **any free-sleep based jailbreak firmware**. Provides local-only climate control, biometric sensors, presence detection, and a custom Lovelace card.
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz)
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2024.1%2B-41BDF5.svg)](https://www.home-assistant.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Compatibility**: This integration works with any free-sleep firmware fork that preserves the standard local API on port 3000. It is not locked to a specific fork or version.
+A [Home Assistant](https://www.home-assistant.io) custom integration for Eight Sleep Pod mattress covers running [free-sleep](https://github.com/throwaway31265/free-sleep) firmware. Provides fully local climate control, biometric sensors, presence detection, and a custom Lovelace dashboard card — no cloud, no accounts, no API keys.
+
+> **Compatibility**: This integration works with any [free-sleep](https://github.com/throwaway31265/free-sleep) firmware fork that preserves the standard local API on port 3000. It is not locked to a specific fork or version.
 
 ## Features
 
-- Climate control (target temperature 55–110°F per side)
-- Power on/off switch per side
-- Biometric sensors: heart rate, HRV, breathing rate per side
-- Bed temperature sensor per side
-- Bed presence detection per side
-- Alarm vibrating status per side
-- Custom Lovelace card with frosted-glass design
-- 100% local — no cloud, no accounts, no API keys
+- **Climate control** — target temperature 55–110°F per side
+- **Power switch** — on/off per side
+- **Biometric sensors** — heart rate, HRV, breathing rate per side
+- **Bed temperature** — current mattress temperature per side
+- **Presence detection** — bed occupancy per side
+- **Alarm status** — vibration alert active per side
+- **Custom Lovelace card** — frosted-glass design with temperature-based color gradients
+- **100% local** — zero cloud dependencies
 
 ## Prerequisites
 
-- Eight Sleep Pod with free-sleep jailbreak firmware installed and running
+- Eight Sleep Pod with [free-sleep](https://github.com/DaSonOfPoseidon/SoundSleeper) firmware installed and running
 - Pod accessible on your local network (note its IP address)
-- Home Assistant 2024.1.0 or newer
+- [Home Assistant](https://www.home-assistant.io) 2024.1.0 or newer
 
 ## Installation
 
 ### HACS (Recommended)
 
-1. Open HACS in your Home Assistant instance
+1. Open [HACS](https://hacs.xyz) in your Home Assistant instance
 2. Click **Integrations**
 3. Click the three-dot menu in the top right → **Custom repositories**
 4. Enter the repository URL: `https://github.com/DaSonOfPoseidon/free-sleep-ha`
@@ -50,7 +54,7 @@ No authentication is required — the Pod API is local HTTP only.
 
 ## Entities
 
-For a two-sided bed, the integration creates 16 entities:
+For a two-sided bed, the integration creates **16 entities**:
 
 | Entity | Type | Per Side | Description |
 |--------|------|----------|-------------|
@@ -94,10 +98,20 @@ Adjust entity IDs to match your installation (names depend on your Pod's side co
 
 ## Network Requirements
 
-The Pod API runs on port 3000. Ensure your Home Assistant instance can reach the Pod IP on that port. No internet access is required.
+The Pod API runs on port **3000**. Ensure your Home Assistant instance can reach the Pod IP on that port. No internet access is required.
 
 ## Troubleshooting
 
-- **Cannot connect during setup**: Verify the Pod IP is correct and reachable. Test with `curl http://<POD_IP>:3000/api/deviceStatus`. Ensure free-sleep firmware is running on the Pod.
-- **Sensors show "Unknown"**: Vitals and presence data require someone to be in bed. These sensors populate once occupancy is detected.
-- **Entities named "Left/Right" instead of person names**: Side names come from Pod settings. Configure names in the free-sleep firmware settings interface.
+| Issue | Solution |
+|-------|----------|
+| Cannot connect during setup | Verify the Pod IP is correct and reachable. Test with `curl http://<POD_IP>:3000/api/deviceStatus`. Ensure [free-sleep](https://github.com/DaSonOfPoseidon/SoundSleeper) firmware is running. |
+| Sensors show "Unknown" | Vitals and presence data require someone to be in bed. Sensors populate once occupancy is detected. |
+| Entities named "Left/Right" instead of person names | Side names come from Pod settings. Configure names in the [free-sleep](https://github.com/DaSonOfPoseidon/SoundSleeper) firmware settings interface. |
+
+## Credits
+
+This integration is built for the [free-sleep](https://github.com/throwaway31265/free-sleep) open-source firmware, which enables local control of Eight Sleep Pod mattress covers without cloud dependencies or subscriptions.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
